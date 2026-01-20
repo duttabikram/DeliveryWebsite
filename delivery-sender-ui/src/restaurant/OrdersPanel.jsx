@@ -9,7 +9,7 @@ export default function OrdersPanel({ restaurantId }) {
   // 📦 Fetch orders
   const fetchOrders = async () => {
     const res = await fetch(
-      `http://localhost:5000/restaurant/${restaurantId}/orders`,
+      `https://deliverywebsite.onrender.com/restaurant/${restaurantId}/orders`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -30,7 +30,7 @@ export default function OrdersPanel({ restaurantId }) {
 
   // 🔄 Update order status
   const updateStatus = async (orderId, status) => {
-    await fetch(`http://localhost:5000/order/${orderId}/status`, {
+    await fetch(`https://deliverywebsite.onrender.com/order/${orderId}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

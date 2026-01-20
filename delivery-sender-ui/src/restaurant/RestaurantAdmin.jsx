@@ -50,7 +50,7 @@ const uploadToCloudinary = async () => {
   const loadFoods = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/restaurant/${restaurantId}/food`,
+        `https://deliverywebsite.onrender.com/restaurant/${restaurantId}/food`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const uploadToCloudinary = async () => {
 
   const fetchRestaurant = async () => {
       try {
-        const res = await fetch("http://localhost:5000/restaurant/my-restaurant", {
+        const res = await fetch("https://deliverywebsite.onrender.com/restaurant/my-restaurant", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -114,7 +114,7 @@ const uploadToCloudinary = async () => {
     
     
   await fetch(
-      `http://localhost:5000/restaurant/${restaurantId}/food`,
+      `https://deliverywebsite.onrender.com/restaurant/${restaurantId}/food`,
       {
         method: "POST",
         headers: {
@@ -135,7 +135,7 @@ const uploadToCloudinary = async () => {
   };
 
   const toggleFood = async (foodId, available) => {
-    await fetch(`http://localhost:5000/food/${foodId}`, {
+    await fetch(`https://deliverywebsite.onrender.com/food/${foodId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const uploadToCloudinary = async () => {
   };
 
     const toggleRes = async (restaurantId, isActive) => {
-    await fetch(`http://localhost:5000/restaurant/${restaurantId}/status`, {
+    await fetch(`https://deliverywebsite.onrender.com/restaurant/${restaurantId}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

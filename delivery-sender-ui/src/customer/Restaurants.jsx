@@ -6,7 +6,7 @@ export default function Restaurants({ onSelect }) {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/restaurants")
+    fetch("https://deliverywebsite.onrender.com/restaurants")
       .then(res => res.json())
       .then(setRestaurants);
   }, []);

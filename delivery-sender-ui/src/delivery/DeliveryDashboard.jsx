@@ -34,7 +34,7 @@ export default function DeliveryDashboard() {
   // 🔴 Rider picks up order
 const markPicked = async () => {
   const res = await fetch(
-    `http://localhost:5000/order/${orderId}/status`,
+    `https://deliverywebsite.onrender.com/order/${orderId}/status`,
     {
       method: "PATCH",
       headers: {
@@ -56,7 +56,7 @@ const markPicked = async () => {
 
 const getLocation = async () => {
   const res = await fetch(
-    `http://localhost:5000/order/${orderId}`,
+    `https://deliverywebsite.onrender.com/order/${orderId}`,
     {
       headers: {
          Authorization: `Bearer ${token}`,
@@ -90,8 +90,8 @@ const getLocation = async () => {
         stopSending();
         return;
       }
-
-      await fetch("http://localhost:5000/location", {
+      
+      await fetch("https://deliverywebsite.onrender.com/location", {
         method: "POST",
         headers: { "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ const getLocation = async () => {
   stopSending();
 
   const res = await fetch(
-    `http://localhost:5000/order/${orderId}/status`,
+    `https://deliverywebsite.onrender.com/order/${orderId}/status`,
     {
       method: "PATCH",
       headers: {

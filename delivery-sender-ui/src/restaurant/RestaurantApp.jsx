@@ -12,7 +12,7 @@ export default function RestaurantApp({ auth }) {
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const res = await fetch("http://localhost:5000/restaurant/my-restaurant", {
+        const res = await fetch("https://deliverywebsite.onrender.com/restaurant/my-restaurant", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },

@@ -33,7 +33,7 @@ L.Icon.Default.mergeOptions({
 
 
 
-const socket = io("http://localhost:5000");
+const socket = io("https://deliverywebsite.onrender.com");
 
 export default function TrackOrder({ restaurant, userId, onBack }) {
   const [orders, setOrders] = useState([]);   
@@ -63,7 +63,7 @@ const totalPay =
 
   useEffect(() => {
   const fetchOrders = async () => {
-    const res = await fetch("http://localhost:5000/order/my-orders", {
+    const res = await fetch("https://deliverywebsite.onrender.com/order/my-orders", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -81,7 +81,7 @@ const totalPay =
 
     const fetchOrder = async () => {
       const res = await fetch(
-        `http://localhost:5000/order/${order.orderId}`,{
+        `https://deliverywebsite.onrender.com/order/${order.orderId}`,{
           headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -130,7 +130,7 @@ const cancelOrder = async () => {
   if (!confirm) return;
 
   const res = await fetch(
-    `http://localhost:5000/order/${order.orderId}/status`,
+    `https://deliverywebsite.onrender.com/order/${order.orderId}/status`,
     {
       method: "PATCH",
       headers: {

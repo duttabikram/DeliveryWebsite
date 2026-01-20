@@ -49,7 +49,7 @@ useEffect(() => {
 
 
 useEffect(() => {
-  fetch(`http://localhost:5000/restaurant/${restaurantId}/food`)
+  fetch(`https://deliverywebsite.onrender.com/restaurant/${restaurantId}/food`)
     .then(res => res.json())
     .then(data => setMenu(data));
 }, []);
@@ -67,7 +67,7 @@ const payNow = async () => {
   }
   setPlacing(true);
 
-  const res = await fetch("http://localhost:5000/payment/create-order", {
+  const res = await fetch("https://deliverywebsite.onrender.com/payment/create-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +96,7 @@ const payNow = async () => {
 };
 
 const verifyPayment = async (response) => {
-  const res = await fetch("http://localhost:5000/payment/verify", {
+  const res = await fetch("https://deliverywebsite.onrender.com/payment/verify", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const placeOrder = async (paymentId) => {
   setPlacing(true);
   
   
-  const res = await fetch("http://localhost:5000/order/create", {
+  const res = await fetch("https://deliverywebsite.onrender.com/order/create", {
     method: "POST",
      headers: {
           "Content-Type": "application/json",

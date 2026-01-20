@@ -75,7 +75,7 @@ useEffect(() => {
     const imageUrl = await uploadToCloudinary();
     if (!imageUrl) return;
 
-    const res = await fetch("http://localhost:5000/restaurant/create", {
+    const res = await fetch("https://deliverywebsite.onrender.com/restaurant/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
