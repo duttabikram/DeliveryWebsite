@@ -1,0 +1,46 @@
+.restaurant-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f6f7fb;
+  padding-top: 60px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.restaurant-container {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Tabs */
+.restaurant-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.restaurant-tabs button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.restaurant-tabs button.active {
+  background: #ff7a18;
+  color: white;
+}
+
+.restaurant-tabs button:hover {
+  opacity: 0.9;
+}

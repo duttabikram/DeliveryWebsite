@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
- const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 const ROUTES = {
   mumbai: [
@@ -9,8 +9,20 @@ const ROUTES = {
     { lat: 19.1018, lng: 72.8619 },
     { lat: 19.0981, lng: 72.8589 },
     { lat: 19.0938, lng: 72.8538 },
+    { lat: 19.0894, lng: 72.8496 },
+    { lat: 19.0851, lng: 72.8451 },
+    { lat: 19.0808, lng: 72.8412 },
+    { lat: 19.0765, lng: 72.8371 },
+    { lat: 19.0721, lng: 72.8328 },
+    { lat: 19.0679, lng: 72.8283 },
+    { lat: 19.0636, lng: 72.8240 },
+    { lat: 19.0594, lng: 72.8198 },
+    { lat: 19.0551, lng: 72.8156 },
+    { lat: 19.0509, lng: 72.8114 },
+    { lat: 19.0467, lng: 72.8071 },
   ],
 };
+
 
 export default function DeliveryDashboard() {
   const [orderId, setOrderId] = useState("ORD101");
@@ -42,6 +54,28 @@ const markPicked = async () => {
   alert("📦 Order picked. Start delivery!");
 };
 
+const getLocation = async () => {
+  const res = await fetch(
+    `http://localhost:5000/order/${orderId}`,
+    {
+      headers: {
+         Authorization: `Bearer ${token}`,
+      }
+    }
+  );
+  if (!res.ok) {
+    const err = await res.json();
+    alert("❌ Failed: " + err.error);
+    return;
+  }
+  const ans = await res.json();
+  const slat = Number(ans.restaurantId.location.lat);
+    const slng = Number(ans.restaurantId.location.lng);
+  const elat = Number(ans.deliveryLocation.lat);
+  const elng = Number(ans.deliveryLocation.lng);
+  alert("start:"+ slat + " " + slng + "end:" + elat + " " + elng);
+  
+};
 
   // 📡 Send GPS updates
   const startSending = () => {
@@ -131,7 +165,7 @@ const markPicked = async () => {
       <br />
 
       <button onClick={markPicked}>📦 Pick Order</button>
-
+       <button onClick={getLocation}>📦 getLocation</button>
       <br /><br />
 
       <button onClick={startSending} disabled={running}>

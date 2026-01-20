@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
   });
 
   const token = jwt.sign(
-    { userId: user._id, role: user.role },
+    { userId: user._id, role: user.role, email: user.email, },
     JWT_SECRET,
     {expiresIn:"7d"}
   );
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
   if (!ok) return res.status(401).json({ error: "Invalid credentials" });
 
   const token = jwt.sign(
-    { userId: user._id, role: user.role },
+    { userId: user._id, role: user.role, email: user.email, },
     JWT_SECRET,
     {expiresIn:"7d"}
   );

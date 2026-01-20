@@ -1,18 +1,18 @@
-
 import { useEffect, useState } from "react";
 import RestaurantAdmin from "./RestaurantAdmin";
 import CreateRestaurant from "./CreateRestaurant";
 import OrdersPanel from "./OrdersPanel";
-
+import "./restaurant.css";
 
 export default function RestaurantApp({ auth }) {
   const [restaurant, setRestaurant] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState("menu"); // menu | orders
 
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const res = await fetch("http://localhost:5000/my-restaurant", {
+        const res = await fetch("http://localhost:5000/restaurant/my-restaurant", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
@@ -20,9 +20,9 @@ export default function RestaurantApp({ auth }) {
 
         if (res.ok) {
           const data = await res.json();
-          setRestaurant(data); // ✅ restaurant exists
+          setRestaurant(data);
         } else {
-          setRestaurant(null); // ❌ no restaurant
+          setRestaurant(null);
         }
       } catch {
         setRestaurant(null);
@@ -36,16 +36,49 @@ export default function RestaurantApp({ auth }) {
 
   if (loading) return <p>Loading…</p>;
 
-  // 🔴 Only show CreateRestaurant if backend says none exists
+  // ❌ No restaurant yet
   if (!restaurant) {
-    return <CreateRestaurant onCreated={setRestaurant} />;
+    return (
+      <div className="restaurant-page">
+        <div className="restaurant-container">
+          <CreateRestaurant onCreated={setRestaurant} />
+        </div>
+      </div>
+    );
   }
 
-  // ✅ Restaurant already exists
-  return(
-    <>
-  <RestaurantAdmin restaurantId={restaurant._id} />
-  <OrdersPanel restaurantId={restaurant._id}/>
-  </>
-  )
+  // ✅ Restaurant exists
+  return (
+    <div className="restaurant-page">
+      <div className="restaurant-container">
+
+        {/* Tabs */}
+        <div className="restaurant-tabs">
+          <button
+            className={tab === "menu" ? "active" : ""}
+            onClick={() => setTab("menu")}
+          >
+            🍽️ Menu
+          </button>
+
+          <button
+            className={tab === "orders" ? "active" : ""}
+            onClick={() => setTab("orders")}
+          >
+            📦 Orders
+          </button>
+        </div>
+
+        {/* Content */}
+        {tab === "menu" && (
+          <RestaurantAdmin restaurantId={restaurant._id} />
+        )}
+
+        {tab === "orders" && (
+          <OrdersPanel restaurantId={restaurant._id} />
+        )}
+
+      </div>
+    </div>
+  );
 }

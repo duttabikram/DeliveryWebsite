@@ -1,0 +1,96 @@
+/* ADMIN PAGE */
+.admin-page {
+  padding: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+/* CENTER ONLY ADD FOOD CARD */
+.add-food-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+/* ADD FOOD CARD */
+.add-food-card {
+  width: 420px;
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* INPUTS */
+.add-food-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* BUTTON */
+.add-food-card button {
+  width: 100%;
+  padding: 12px;
+  background: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* FOOD GRID */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* FOOD CARD */
+.food-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 14px;
+}
+
+.food-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.food-card h4 {
+  margin: 10px 0 4px;
+}
+
+.food-card p {
+  margin: 0 0 10px;
+}
+
+.back-btn {
+  padding: 6px;
+  font-size: 16px;
+  background: #ff6f00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-btn:disabled {
+  background: #ccc;
+}
+
+.menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 👈 key line */
+  margin-bottom: 20px;
+}

@@ -79,19 +79,45 @@ export default function OrdersPanel({ restaurantId }) {
           </ul>
 
           {/* 🔘 ACTION BUTTONS */}
-          <div style={{ marginTop: 10 }}>
-            {order.status === "PLACED" && (
-              <button
-                onClick={() =>
-                  updateStatus(order.orderId, "ACCEPTED")
-                }
-              >
-                ✅ Accept Order
-              </button>
-            )}
+          {/* ACTION BUTTONS */}
+           <div style={{ marginTop: 10 }}>
+             {order.status === "PLACED" && (
+               <>
+                 <button
+                   style={{ background: "green", color: "white" }}
+                   className="back-btn"
+                   onClick={() => updateStatus(order.orderId, "ACCEPTED")}
+                 >
+                   ✅ Accept Order
+                 </button>
+           
+                 <button
+                   style={{ background: "red", color: "white", marginLeft: "10px" }}
+                   className="back-btn"
+                   onClick={() => updateStatus(order.orderId, "CANCELLED")}
+                 >
+                   ❌ Cancel Order
+                 </button>
+               </>
+             )}        
+
+            {order.status === "CANCELLED" && (
+            <div
+              style={{
+                background: "#ffe6e6",
+                color: "#b30000",
+                padding: "10px",
+                borderRadius: "6px",
+                marginTop: "10px",
+                fontWeight: "bold",
+              }}
+            >
+              ❌ Order Cancelled
+            </div>
+                       )}
 
             {order.status === "ACCEPTED" && (
-              <button
+              <button  style={{ background: "green", color: "white" }} className="back-btn"
                 onClick={() =>
                   updateStatus(order.orderId, "PREPARING")
                 }

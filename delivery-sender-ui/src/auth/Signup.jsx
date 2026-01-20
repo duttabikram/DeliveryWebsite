@@ -37,7 +37,7 @@ export default function Signup({ onLogin }) {
         <option value="DELIVERY">Delivery</option>
       </select>
 
-      <button onClick={signup}>Create Account</button>
+      <button className="submit-btn" onClick={signup}>Create Account</button>
     </div>
   );
 }

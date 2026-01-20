@@ -9,6 +9,7 @@ export function getAuthUser() {
       token,                 // ✅ REQUIRED
       userId: payload.userId,
       role: payload.role,
+      email: payload.email,
     };
   } catch (err) {
     console.error("Invalid token", err);

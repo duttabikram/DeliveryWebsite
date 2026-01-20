@@ -25,7 +25,7 @@ export default function Login({ onLogin }) {
       <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
       <input type="password" placeholder="Password"
         onChange={e => setPassword(e.target.value)} />
-      <button onClick={login}>Login</button>
+      <button className="submit-btn" onClick={login}>Login</button>
     </div>
   );
 }
