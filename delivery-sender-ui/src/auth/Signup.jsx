@@ -11,7 +11,7 @@ export default function Signup({ onLogin }) {
   });
 
   const signup = async () => {
-    const res = await fetch("http://localhost:5000/auth/signup", {
+    const res = await fetch("https://deliverywebsite.onrender.com/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
