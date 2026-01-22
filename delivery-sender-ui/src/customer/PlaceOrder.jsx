@@ -161,6 +161,18 @@ const placeOrder = async (paymentId) => {
     return [...prev, { ...food, qty: 1 }];
   });
 };
+
+const decreaseQty = (foodId) => {
+  setCart(prev =>
+    prev
+      .map(item =>
+        item._id === foodId
+          ? { ...item, qty: item.qty - 1 }
+          : item
+      )
+      .filter(item => item.qty > 0) // auto-remove
+  );
+};
            
   return (
     <div className="menu-page">
@@ -210,9 +222,12 @@ const placeOrder = async (paymentId) => {
 
       <div className="cart-list">
         {cart.map(item => (
+          <div className="dec-btn">
           <p key={item._id}>
             {item.name} × {item.qty}
           </p>
+           <button onClick={() => decreaseQty(item._id)}>➖</button>
+          </div>
         ))}
       </div>
       {!location && !locationError && <p>📍 Detecting your location…</p>}
