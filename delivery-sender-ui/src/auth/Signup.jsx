@@ -3,6 +3,7 @@ import { getAuthUser } from "../utils/auth";
 
 
 export default function Signup({ onLogin }) {
+  const [placing, setPlacing] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -11,6 +12,7 @@ export default function Signup({ onLogin }) {
   });
 
   const signup = async () => {
+    setPlacing(true);
     const res = await fetch("https://deliverywebsite.onrender.com/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,6 +22,7 @@ export default function Signup({ onLogin }) {
     const data = await res.json();
     localStorage.setItem("token", data.token);
     onLogin(getAuthUser());
+    setPlacing(false);
   };
 
   return (
@@ -37,7 +40,10 @@ export default function Signup({ onLogin }) {
         <option value="DELIVERY">Delivery</option>
       </select>
 
-      <button className="submit-btn" onClick={signup}>Create Account</button>
+      <button disabled={placing} className="submit-btn" onClick={signup}>{placing ? "Creating Account..." : "Create Account"}</button>
     </div>
   );
 }
+
+
+ 

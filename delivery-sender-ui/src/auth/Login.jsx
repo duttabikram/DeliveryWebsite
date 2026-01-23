@@ -5,8 +5,11 @@ import { getAuthUser } from "../utils/auth";
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [placing, setPlacing] = useState(false);
+
 
   const login = async () => {
+    setPlacing(true);
     const res = await fetch("https://deliverywebsite.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,6 +20,7 @@ export default function Login({ onLogin }) {
     localStorage.setItem("token", data.token);
 
     onLogin(getAuthUser());
+    setPlacing(false);
   };
 
   return (
@@ -25,7 +29,7 @@ export default function Login({ onLogin }) {
       <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
       <input type="password" placeholder="Password"
         onChange={e => setPassword(e.target.value)} />
-      <button className="submit-btn" onClick={login}>Login</button>
+      <button disabled={placing} className="submit-btn" onClick={login}>{placing ? "Loging..." : "Login"}</button>
     </div>
   );
 }

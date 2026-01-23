@@ -7,7 +7,7 @@ import AuthPage from "./auth/AuthPage";
 import { getAuthUser } from "./utils/auth";
 import Navbar from "./components/Navbar";
 export default function App() {
-  const [auth, setAuth] = useState(null);
+const [auth, setAuth] = useState(null);
 
   useEffect(() => {
     setAuth(getAuthUser());
