@@ -134,6 +134,22 @@ const uploadToCloudinary = async () => {
 
   };
 
+  const removeFood = async (foodId) => {
+
+  await fetch(
+    `https://deliverywebsite.onrender.com/restaurant/food/${foodId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  // 🔄 Update UI
+  setFoods((prev) => prev.filter((f) => f._id !== foodId));
+};
+
   const toggleFood = async (foodId, available) => {
     await fetch(`https://deliverywebsite.onrender.com/food/${foodId}`, {
       method: "PATCH",
@@ -205,6 +221,7 @@ const uploadToCloudinary = async () => {
         <button style={{ background: "black", color: "white" }} className="back-btn" onClick={() => toggleFood(food._id, food.available)}>
           {food.available ? "Disable" : "Enable"}
         </button>
+        <button style={{ background: "red", color: "white" }} className="back-btn" onClick={() => removeFood(food._id)}> Remove </button>
       </div>
     ))}
   </div>

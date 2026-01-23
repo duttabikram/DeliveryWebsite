@@ -144,5 +144,30 @@ try{
   }
 );
 
+// 🗑️ Remove food item
+router.delete(
+  "/food/:foodId",
+  auth(["RESTAURANT"]),
+  async (req, res) => {
+    const { foodId } = req.params;
+
+    const food = await Food.findById(foodId);
+
+    if (!food) {
+      return res.status(404).json({ error: "Food item not found" });
+    }
+
+    // 🔒 Ensure food belongs to this restaurant
+    if (food.restaurantId.toString() !== req.user.userId) {
+      return res.status(403).json({ error: "Not authorized" });
+    }
+
+    await food.deleteOne();
+
+    res.json({
+      message: "Food item removed successfully",
+    });
+  }
+);
 
 module.exports = router;
