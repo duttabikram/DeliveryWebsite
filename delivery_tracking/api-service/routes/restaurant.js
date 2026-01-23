@@ -157,16 +157,14 @@ router.delete(
       return res.status(404).json({ error: "Food item not found" });
     }
     
-    const restaurant = await Restaurant.findOne({
-      ownerUserId: req.user.userId,
-    });
+    const restaurant = await Restaurant.findById(food.restaurantId);
 
     if (!restaurant) {
       return res.status(404).json({ error: "Restaurant not found" });
     }
 
     // 🔒 Ensure food belongs to this restaurant
-    if (food.restaurantId.toString() !== restaurant._id) {
+    if (restaurant.ownerUserId.toString() !== req.user.userId) {
       return res.status(403).json({ error: "Not authorized" });
     }
 
