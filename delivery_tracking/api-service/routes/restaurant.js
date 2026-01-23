@@ -166,7 +166,7 @@ router.delete(
     }
 
     // 🔒 Ensure food belongs to this restaurant
-    if (food.restaurantId.toString() !== restaurant._id) {
+    if (food.restaurantId !== restaurant._id) {
       return res.status(403).json({ error: "Not authorized" });
     }
 
