@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 
 const FoodSchema = new mongoose.Schema(
   {
-    restaurantId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Restaurant",
-          required: true,
-        },
+    restaurantId: { type: String, required: true },
     name: { type: String, required: true },
     price: { type: Number, required: true },
     imageUrl: String,
