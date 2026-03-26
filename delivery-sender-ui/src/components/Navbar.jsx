@@ -1,17 +1,6 @@
-import { useState, useEffect } from "react";
 import LogoutButton from "./LogoutButton";
 
 export default function Navbar({ auth, onLogout }) {
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 600);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 600);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const getEmoji = (role) => {
     if (role === "CUSTOMER") return "🧑‍🍳";
@@ -35,7 +24,7 @@ export default function Navbar({ auth, onLogout }) {
         borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      {/* LEFT */}
+      {/* LEFT SIDE */}
       <div
         style={{
           display: "flex",
@@ -44,6 +33,7 @@ export default function Navbar({ auth, onLogout }) {
           flexWrap: "wrap",
         }}
       >
+        {/* LOGO */}
         <div
           style={{
             fontSize: "16px",
@@ -55,6 +45,7 @@ export default function Navbar({ auth, onLogout }) {
           🍔 FOODIE
         </div>
 
+        {/* ROLE + EMAIL */}
         <div
           style={{
             fontSize: "12px",
@@ -76,21 +67,9 @@ export default function Navbar({ auth, onLogout }) {
         </div>
       </div>
 
-      {/* RIGHT */}
-      <div
-        style={{
-          padding: "5px 12px",
-          borderRadius: "999px",
-          border: "1px solid #22c55e",
-          color: "#22c55e",
-          fontSize: "12px",
-          cursor: "pointer",
-          whiteSpace: "nowrap",
-        }}
-      >
-        <LogoutButton onLogout={onLogout}>
-          {isMobile ? "🚪" : "Logout 🚪"}
-        </LogoutButton>
+      {/* RIGHT SIDE */}
+      <div>
+        <LogoutButton onLogout={onLogout} />
       </div>
     </div>
   );
