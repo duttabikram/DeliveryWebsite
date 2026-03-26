@@ -1,28 +1,86 @@
 import LogoutButton from "./LogoutButton";
 
 export default function Navbar({ auth, onLogout }) {
+
+  const getEmoji = (role) => {
+    if (role === "CUSTOMER") return "🧑‍🍳";
+    if (role === "RESTAURANT") return "🏪";
+    if (role === "DELIVERY") return "🛵";
+    return "👤";
+  };
+
   return (
     <div
       style={{
-        padding: "12px 20px",
-        background: "#f5f5f5",
+        padding: "10px 14px",
+        background: "#0a0a0a",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderBottom: "1px solid #ddd",
+        color: "white",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000,
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      <div>
-        <b>🍔 Food Delivery App</b>
-        <span style={{ marginLeft: 10, color: "#b83a3ac6" }}>
-          {auth.role}
-        </span>
-        <span style={{ marginLeft: 10, color: "#1d08bc94" }}>
-          {auth.email}
-        </span>
+      {/* LEFT SIDE */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          flexWrap: "wrap",
+        }}
+      >
+        {/* LOGO */}
+        <div
+          style={{
+            fontSize: "16px",
+            fontWeight: "600",
+            letterSpacing: "1px",
+            color: "#22c55e",
+          }}
+        >
+          🍔 FOODIE
+        </div>
+
+        {/* ROLE + EMAIL */}
+        <div
+          style={{
+            fontSize: "12px",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            flexWrap: "wrap",
+          }}
+        >
+          <span style={{ color: "#22c55e" }}>
+            {getEmoji(auth.role)} {auth.role}
+          </span>
+
+          <span style={{ color: "#666" }}>•</span>
+
+          <span style={{ color: "#aaa" }}>
+            {auth.email}
+          </span>
+        </div>
       </div>
 
-      <LogoutButton onLogout={onLogout} />
+      {/* RIGHT SIDE */}
+      <div
+        style={{
+          padding: "5px 12px",
+          borderRadius: "999px",
+          border: "1px solid #22c55e",
+          color: "#22c55e",
+          fontSize: "12px",
+          cursor: "pointer",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <LogoutButton onLogout={onLogout} />
+      </div>
     </div>
   );
 }
