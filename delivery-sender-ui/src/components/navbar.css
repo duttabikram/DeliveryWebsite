@@ -1,0 +1,122 @@
+/* NAVBAR */
+.navbar {
+  height: 60px;
+  padding: 0 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #0f172a;
+  color: white;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGO */
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* RIGHT */
+.nav-right {
+  position: relative;
+}
+
+/* AVATAR */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  background: #22c55e;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.avatar.large {
+  width: 40px;
+  height: 40px;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+
+  width: 240px;
+  background: white;
+  color: black;
+
+  border-radius: 12px;
+  padding: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: all 0.2s ease;
+}
+
+.dropdown.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* HEADER */
+.dropdown-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.email {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.role {
+  font-size: 12px;
+  color: #666;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 10px 0;
+}
+
+/* LOGOUT */
+.logout-btn {
+  width: 100%;
+  padding: 8px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #ef4444;
+  color: white;
+
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
