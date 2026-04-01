@@ -91,7 +91,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="auth-page">
+    <div className="auth-pagee">
       <div className="overlay"></div>
       <div className="auth-card">
         <h2>🏪 Create Your Restaurant</h2>
