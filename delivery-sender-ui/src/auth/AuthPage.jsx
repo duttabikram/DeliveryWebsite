@@ -8,6 +8,7 @@ export default function AuthPage({ onAuth }) {
 
   return (
     <div className="auth-page">
+      <div className="overlay"></div> 
       <div className="auth-container">
 
         {/* Tabs */}

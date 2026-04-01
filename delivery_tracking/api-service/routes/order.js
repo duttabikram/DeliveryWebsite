@@ -4,6 +4,9 @@ const Order = require("../models/order");
 const { connectMongo } = require("../db/mongo");
 const Food = require("../models/Food");
 const Restaurant = require("../models/Restaurant");
+const axios = require("axios");
+const redis = require("../utils/redis");
+
 
 const router = express.Router();
 
@@ -232,6 +235,80 @@ async function processRefund(order) {
     await order.save();
   }
 }
+
+
+router.get("/:orderId/route", auth(["DELIVERY"]), async (req, res) => {
+  try {
+    const order = await Order.findOne({ orderId: req.params.orderId })
+      .populate("restaurantId");
+
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    const slat = order.restaurantId.location.lat;
+    const slng = order.restaurantId.location.lng;
+    const elat = order.deliveryLocation.lat;
+    const elng = order.deliveryLocation.lng;
+
+    console.log("Restaurant:", slat, slng);
+    console.log("User:", elat, elng);
+
+    // 🚀 OpenRouteService API (FREE)
+    const response = await axios.post(
+      "https://api.openrouteservice.org/v2/directions/driving-car",
+      {
+        coordinates: [
+          [slng, slat], // restaurant (origin)
+          [elng, elat], // user (destination)
+        ],
+      },
+      {
+        headers: {
+          Authorization: "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImMyYmMwYzBiNzcwYzRhZGNhZDA2ZWQ4Y2VlMzJhY2IxIiwiaCI6Im11cm11cjY0In0=",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (
+      !response.data.routes ||
+      response.data.routes.length === 0
+    ) {
+      return res.status(500).json({ error: "No route found" });
+    }
+
+    const route = response.data.routes[0];
+
+    const distance = route.summary.distance; // meters
+    const duration = route.summary.duration; // seconds
+
+    const eta =
+      duration < 60
+        ? `${Math.round(duration)} sec`
+        : `${Math.round(duration / 60)} mins`;
+
+    const polyline = route.geometry; // encoded polyline
+
+    // 🔥 ADD THIS
+await redis.set(
+  `order:${req.params.orderId}:route`,
+  JSON.stringify({ eta, distance, polyline }),
+  { EX: 300 }
+);
+
+
+    res.json({
+      eta,
+      distance,
+      polyline,
+    });
+
+  } catch (err) {
+    console.error("❌ Error:", err.message);
+    res.status(500).json({ error: "Failed to fetch route" });
+  }
+});
 
 module.exports = router;
 

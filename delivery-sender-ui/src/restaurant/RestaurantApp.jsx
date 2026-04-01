@@ -39,11 +39,7 @@ export default function RestaurantApp({ auth }) {
   // ❌ No restaurant yet
   if (!restaurant) {
     return (
-      <div className="restaurant-page">
-        <div className="restaurant-container">
           <CreateRestaurant onCreated={setRestaurant} />
-        </div>
-      </div>
     );
   }
 

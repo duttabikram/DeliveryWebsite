@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Menu.css";
 
-
 export default function Restaurants({ onSelect }) {
   const [restaurants, setRestaurants] = useState([]);
 
@@ -13,18 +12,28 @@ export default function Restaurants({ onSelect }) {
 
   return (
     <div className="menu-page">
-      <h2 className="menu-title" >🍽️ Restaurants</h2>
-      {restaurants.length === 0 && <p className="empty-cart">No Retaurants Yet</p>}
+      <h2 className="menu-title">🍽️ Restaurants</h2>
+
+      {restaurants.length === 0 && (
+        <p className="empty-cart">No Restaurants Yet</p>
+      )}
+
       <div className="food-grid">
-        {restaurants.map(r => (
-          <div key={r._id}
-            onClick={() => onSelect(r)} 
-            className="food-card">
-            {/* RESTAURANT IMAGE */}
+        {restaurants.map((r) => (
+          <div
+            key={r._id}
+            onClick={() => onSelect(r)}
+            className="food-card"
+          >
+            {/* IMAGE */}
             <div className="food-image">
-              <img src={r.imageUrl} alt={r.name} style={{height: 120}}/>
+              <img
+                src={r.imageUrl || "https://via.placeholder.com/300x200"}
+                alt={r.name}
+              />
             </div>
-            {/* RESTAURANT INFO */}
+
+            {/* INFO */}
             <div className="food-body">
               <h4>{r.name}</h4>
               <p className="price">{r.address}</p>
@@ -35,4 +44,3 @@ export default function Restaurants({ onSelect }) {
     </div>
   );
 }
-

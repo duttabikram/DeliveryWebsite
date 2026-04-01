@@ -11,20 +11,43 @@ body {
 
 /* ===== PAGE CENTERING ===== */
 .auth-page {
+  position: relative;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f4f4f4;
+
+  /* 🔥 Background Image */
+  background: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836")
+    no-repeat center center/cover;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  top: 0;
+  left: 0;
 }
 
 /* ===== CONTAINER ===== */
 .auth-container {
+  position: relative;
+  z-index: 2;
+
   width: 350px;
-  background: white;
   padding: 24px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  /* 🔥 Glass effect */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+
+  color: white;
 }
 
 /* ===== TABS ===== */

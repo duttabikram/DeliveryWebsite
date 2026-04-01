@@ -11,11 +11,6 @@ const auth = require("./middleware/auth");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/auth", require("./routes/auth"));
-app.use("/payment", require("./routes/payment"));
-app.use("/order", require("./routes/order"));
-app.use("/restaurant", require("./routes/restaurant"));
-app.use("/location", require("./routes/location"));
 
 /* ----------HTTP and WebSocket Server---------- */
 const server = http.createServer(app);
@@ -23,6 +18,17 @@ const io = new Server(server, {
   cors: { origin: "*" },
 });
 
+// ✅ INJECT IO IN EVERY REQ
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+app.use("/auth", require("./routes/auth"));
+app.use("/payment", require("./routes/payment"));
+app.use("/order", require("./routes/order"));
+app.use("/restaurant", require("./routes/restaurant"));
+app.use("/location", require("./routes/location"));
 require("./socket")(io);
 
 /* ---------- REST API ---------- */

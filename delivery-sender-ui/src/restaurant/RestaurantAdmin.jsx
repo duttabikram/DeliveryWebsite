@@ -181,7 +181,7 @@ const uploadToCloudinary = async () => {
   <div className="menu-head">
   <h2>🍽️ Restaurant Menu Admin</h2>
   <button style={{ background: "black", color: "white" }} className="back-btn" onClick={() => toggleRes(restaurantId, restaurant.isActive)}>
-    {restaurant.isActive ? "Disable" : "Enable"}
+    {restaurant.isActive ? "Disable Restaurant" : "Enable Restaurant"}
   </button>
   </div>
   {/* CENTERED ADD FOOD CARD */}
